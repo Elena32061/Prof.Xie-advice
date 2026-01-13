@@ -141,6 +141,23 @@
             box-shadow: 0 20px 60px rgba(246, 200, 87, 0.3);
         }
 
+        .hero-photo {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 20px 60px rgba(246, 200, 87, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -1011,7 +1028,9 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <div class="hero-icon">🎓</div>
+            <div class="hero-photo">
+                <img src="prof_xie.jpg" alt="Prof. Yuan Xie">
+            </div>
             <span class="subtitle">HKUST ECE · Yuan Xie 教授</span>
             <h1>PhD 研究建议宝典</h1>
             <p>汇集学术界顶尖智慧，为你的博士研究之旅照亮前行的道路。从研究方法到论文写作，从演讲技巧到职业发展，全方位助力你的学术成长。</p>
