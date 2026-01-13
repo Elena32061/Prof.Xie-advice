@@ -241,55 +241,49 @@
             font-size: 1.1rem;
         }
 
-        /* PhD Journey Timeline */
+        /* PhD Journey Timeline - Horizontal */
         .journey-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             position: relative;
-            padding: 40px 0;
+            padding: 60px 20px 40px;
+            gap: 20px;
         }
 
         .journey-timeline::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-blue), var(--accent-purple), var(--accent-teal));
+            top: 85px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-blue), var(--accent-purple), var(--accent-teal));
             border-radius: 2px;
         }
 
         .journey-item {
+            flex: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 60px;
+            text-align: center;
             position: relative;
         }
 
-        .journey-item:nth-child(odd) .journey-content {
-            margin-right: calc(50% + 40px);
-            text-align: right;
-        }
-
-        .journey-item:nth-child(even) .journey-content {
-            margin-left: calc(50% + 40px);
-            text-align: left;
-        }
-
         .journey-node {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--bg-primary);
             z-index: 2;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
         }
 
         .journey-item:nth-child(1) .journey-node {
@@ -309,34 +303,32 @@
         }
 
         .journey-content {
-            max-width: 400px;
-            padding: 30px;
+            padding: 20px;
             background: var(--bg-card);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            width: 100%;
         }
 
         .journey-content:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .journey-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .journey-item:nth-child(odd) .journey-content h3 {
-            justify-content: flex-end;
+            justify-content: center;
+            gap: 8px;
         }
 
         .journey-content p {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.9rem;
         }
 
         /* Stats Grid */
@@ -812,34 +804,39 @@
         }
 
         @media (max-width: 768px) {
+            .journey-timeline {
+                flex-direction: column;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
             .journey-timeline::before {
-                left: 30px;
+                top: 20px;
+                bottom: 20px;
+                left: 35px;
+                right: auto;
+                width: 4px;
+                height: auto;
+                background: linear-gradient(to bottom, var(--accent-gold), var(--accent-blue), var(--accent-purple), var(--accent-teal));
             }
 
             .journey-item {
-                justify-content: flex-start;
-            }
-
-            .journey-node {
-                left: 30px;
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .journey-item:nth-child(odd) .journey-content,
-            .journey-item:nth-child(even) .journey-content {
-                margin-left: 80px;
-                margin-right: 0;
+                flex-direction: row;
+                align-items: flex-start;
                 text-align: left;
             }
 
-            .journey-item:nth-child(odd) .journey-content h3 {
-                justify-content: flex-start;
+            .journey-node {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+                flex-shrink: 0;
+                margin-bottom: 0;
+                margin-right: 15px;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .journey-content h3 {
+                justify-content: flex-start;
             }
 
             .pyramid-block {
@@ -1080,35 +1077,35 @@
             
             <div class="journey-timeline">
                 <div class="journey-item">
+                    <div class="journey-node">1</div>
                     <div class="journey-content">
                         <h3>🔬 研究入门</h3>
-                        <p>选定研究方向，广泛阅读文献，建立扎实的理论基础。学会批判性思维，找到研究的切入点。</p>
+                        <p>选定方向，广泛阅读，建立理论基础</p>
                     </div>
-                    <div class="journey-node">1</div>
                 </div>
 
                 <div class="journey-item">
+                    <div class="journey-node">2</div>
                     <div class="journey-content">
                         <h3>✍️ 论文写作</h3>
-                        <p>掌握学术写作技巧，学会清晰表达复杂思想。从第一篇论文开始，不断打磨写作能力。</p>
+                        <p>掌握学术写作，清晰表达复杂思想</p>
                     </div>
-                    <div class="journey-node">2</div>
                 </div>
 
                 <div class="journey-item">
+                    <div class="journey-node">3</div>
                     <div class="journey-content">
                         <h3>🎤 学术展示</h3>
-                        <p>提升演讲表达能力，学会在学术会议上自信展示研究成果。有效沟通是学术成功的关键。</p>
+                        <p>提升演讲能力，自信展示研究成果</p>
                     </div>
-                    <div class="journey-node">3</div>
                 </div>
 
                 <div class="journey-item">
+                    <div class="journey-node">4</div>
                     <div class="journey-content">
                         <h3>🌟 职业腾飞</h3>
-                        <p>规划学术职业路径，建立学术人脉网络。为毕业后的发展做好充分准备。</p>
+                        <p>规划职业路径，建立学术人脉网络</p>
                     </div>
-                    <div class="journey-node">4</div>
                 </div>
             </div>
         </section>
