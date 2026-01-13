@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuan Xie 教授 PhD 研究建议可视化</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-gold: #f6c857;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-teal: #14b8a6;
+            --accent-rose: #f472b6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(246, 200, 87, 0.05) 0%, transparent 70%);
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.03;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-gold);
+            top: 10%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-blue);
+            top: 60%;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-purple);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(0, -60px) rotate(180deg); }
+            75% { transform: translate(-30px, -30px) rotate(270deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(246, 200, 87, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            animation: pulse 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(246, 200, 87, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #fff 50%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .hero .subtitle {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(246, 200, 87, 0.1);
+            border: 1px solid rgba(246, 200, 87, 0.3);
+            border-radius: 30px;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* Journey Path */
+        .journey-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* PhD Journey Timeline */
+        .journey-timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-blue), var(--accent-purple), var(--accent-teal));
+            border-radius: 2px;
+        }
+
+        .journey-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .journey-item:nth-child(odd) .journey-content {
+            margin-right: calc(50% + 40px);
+            text-align: right;
+        }
+
+        .journey-item:nth-child(even) .journey-content {
+            margin-left: calc(50% + 40px);
+            text-align: left;
+        }
+
+        .journey-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .journey-item:nth-child(1) .journey-node {
+            background: linear-gradient(135deg, var(--accent-gold), #ffd700);
+        }
+
+        .journey-item:nth-child(2) .journey-node {
+            background: linear-gradient(135deg, var(--accent-blue), #60a5fa);
+        }
+
+        .journey-item:nth-child(3) .journey-node {
+            background: linear-gradient(135deg, var(--accent-purple), #a78bfa);
+        }
+
+        .journey-item:nth-child(4) .journey-node {
+            background: linear-gradient(135deg, var(--accent-teal), #2dd4bf);
+        }
+
+        .journey-content {
+            max-width: 400px;
+            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .journey-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .journey-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .journey-item:nth-child(odd) .journey-content h3 {
+            justify-content: flex-end;
+        }
+
+        .journey-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .stat-card:nth-child(1)::before { background: var(--accent-gold); }
+        .stat-card:nth-child(2)::before { background: var(--accent-blue); }
+        .stat-card:nth-child(3)::before { background: var(--accent-purple); }
+        .stat-card:nth-child(4)::before { background: var(--accent-teal); }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-card:nth-child(1) .stat-number { color: var(--accent-gold); }
+        .stat-card:nth-child(2) .stat-number { color: var(--accent-blue); }
+        .stat-card:nth-child(3) .stat-number { color: var(--accent-purple); }
+        .stat-card:nth-child(4) .stat-number { color: var(--accent-teal); }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Advice Categories */
+        .categories-section {
+            margin-bottom: 80px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-card:nth-child(1)::before {
+            background: linear-gradient(135deg, rgba(246, 200, 87, 0.1), transparent);
+        }
+
+        .category-card:nth-child(2)::before {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+        }
+
+        .category-card:nth-child(3)::before {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), transparent);
+        }
+
+        .category-card:nth-child(4)::before {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), transparent);
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .category-card:nth-child(1) .category-icon {
+            background: linear-gradient(135deg, var(--accent-gold), #ffd700);
+        }
+
+        .category-card:nth-child(2) .category-icon {
+            background: linear-gradient(135deg, var(--accent-blue), #60a5fa);
+        }
+
+        .category-card:nth-child(3) .category-icon {
+            background: linear-gradient(135deg, var(--accent-purple), #a78bfa);
+        }
+
+        .category-card:nth-child(4) .category-icon {
+            background: linear-gradient(135deg, var(--accent-teal), #2dd4bf);
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .category-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .category-list li:hover {
+            padding-left: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .category-list li[onclick] {
+            cursor: pointer;
+        }
+
+        .category-list li[onclick]:hover .item-title {
+            color: var(--accent-gold);
+        }
+
+        .category-list .bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .category-card:nth-child(1) .bullet { background: var(--accent-gold); }
+        .category-card:nth-child(2) .bullet { background: var(--accent-blue); }
+        .category-card:nth-child(3) .bullet { background: var(--accent-purple); }
+        .category-card:nth-child(4) .bullet { background: var(--accent-teal); }
+
+        .category-list .item-text {
+            flex: 1;
+        }
+
+        .category-list .item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .category-list .item-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Key Insights */
+        .insights-section {
+            margin-bottom: 80px;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .insight-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .insight-emoji {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+        .insight-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Pyramid Chart */
+        .pyramid-section {
+            margin-bottom: 80px;
+        }
+
+        .pyramid-container {
+            max-width: 700px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .pyramid-level {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .pyramid-level:nth-child(1) { animation-delay: 0.1s; }
+        .pyramid-level:nth-child(2) { animation-delay: 0.2s; }
+        .pyramid-level:nth-child(3) { animation-delay: 0.3s; }
+        .pyramid-level:nth-child(4) { animation-delay: 0.4s; }
+        .pyramid-level:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pyramid-block {
+            padding: 25px 40px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #0a0f1a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pyramid-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pyramid-level:nth-child(1) .pyramid-block {
+            width: 30%;
+            background: linear-gradient(135deg, #ffd700, var(--accent-gold));
+        }
+
+        .pyramid-level:nth-child(2) .pyramid-block {
+            width: 45%;
+            background: linear-gradient(135deg, #60a5fa, var(--accent-blue));
+        }
+
+        .pyramid-level:nth-child(3) .pyramid-block {
+            width: 60%;
+            background: linear-gradient(135deg, #a78bfa, var(--accent-purple));
+        }
+
+        .pyramid-level:nth-child(4) .pyramid-block {
+            width: 75%;
+            background: linear-gradient(135deg, #f472b6, var(--accent-rose));
+        }
+
+        .pyramid-level:nth-child(5) .pyramid-block {
+            width: 90%;
+            background: linear-gradient(135deg, #2dd4bf, var(--accent-teal));
+        }
+
+        .pyramid-block .level-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .pyramid-block .level-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            margin-bottom: 80px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(246, 200, 87, 0.1);
+        }
+
+        .resource-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            line-height: 1.5;
+        }
+
+        .resource-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            width: fit-content;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .footer-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--accent-gold), #ffd700);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(246, 200, 87, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .journey-timeline::before {
+                left: 30px;
+            }
+
+            .journey-item {
+                justify-content: flex-start;
+            }
+
+            .journey-node {
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .journey-item:nth-child(odd) .journey-content,
+            .journey-item:nth-child(even) .journey-content {
+                margin-left: 80px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .journey-item:nth-child(odd) .journey-content h3 {
+                justify-content: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pyramid-block {
+                padding: 20px 30px;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 30px 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: sticky;
+            top: 0;
+            background: var(--bg-card);
+            z-index: 10;
+        }
+
+        .modal-header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .modal-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .modal-title-group h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+        }
+
+        .modal-title-group p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .modal-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-body h4 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+        }
+
+        .modal-body p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .modal-body ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-body ul li:last-child {
+            border-bottom: none;
+        }
+
+        .modal-body ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .modal-body .highlight-box {
+            background: rgba(246, 200, 87, 0.1);
+            border-left: 4px solid var(--accent-gold);
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+        }
+
+        .modal-body .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        .modal-body .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .modal-body .key-point {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-body .key-point .emoji {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .modal-body .key-point h5 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .modal-body .key-point p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .resource-card {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-icon">🎓</div>
+            <span class="subtitle">HKUST ECE · Yuan Xie 教授</span>
+            <h1>PhD 研究建议宝典</h1>
+            <p>汇集学术界顶尖智慧，为你的博士研究之旅照亮前行的道路。从研究方法到论文写作，从演讲技巧到职业发展，全方位助力你的学术成长。</p>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number">4</div>
+                <div class="stat-label">核心领域</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-number">12+</div>
+                <div class="stat-label">精选资源</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👨‍🏫</div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">专家作者</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number">∞</div>
+                <div class="stat-label">成长可能</div>
+            </div>
+        </section>
+
+        <!-- PhD Journey Timeline -->
+        <section class="journey-section">
+            <div class="section-title">
+                <h2>🚀 PhD 成长之路</h2>
+                <p>从入门到精通，每一步都至关重要</p>
+            </div>
+            
+            <div class="journey-timeline">
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <h3>🔬 研究入门</h3>
+                        <p>选定研究方向，广泛阅读文献，建立扎实的理论基础。学会批判性思维，找到研究的切入点。</p>
+                    </div>
+                    <div class="journey-node">1</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <h3>✍️ 论文写作</h3>
+                        <p>掌握学术写作技巧，学会清晰表达复杂思想。从第一篇论文开始，不断打磨写作能力。</p>
+                    </div>
+                    <div class="journey-node">2</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <h3>🎤 学术展示</h3>
+                        <p>提升演讲表达能力，学会在学术会议上自信展示研究成果。有效沟通是学术成功的关键。</p>
+                    </div>
+                    <div class="journey-node">3</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <h3>🌟 职业腾飞</h3>
+                        <p>规划学术职业路径，建立学术人脉网络。为毕业后的发展做好充分准备。</p>
+                    </div>
+                    <div class="journey-node">4</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Cards -->
+        <section class="categories-section">
+            <div class="section-title">
+                <h2>📖 四大核心领域</h2>
+                <p>Yuan Xie 教授精选的学术建议资源</p>
+            </div>
+
+            <div class="category-grid">
+                <!-- Research Methods -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🔬</div>
+                        <h3 class="category-title">研究方法</h3>
+                    </div>
+                    <ul class="category-list">
+                        <li onclick="openModal('nielsen')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">有效研究的原则</div>
+                                <div class="item-desc">Michael A. Nielsen 分享如何高效开展研究工作</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('bellare')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">博士经历分享</div>
+                                <div class="item-desc">Mihir Bellare 的博士生涯经验与反思</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('henzinger')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">研究建议合集</div>
+                                <div class="item-desc">Tom Henzinger 对研究方法的深度指导</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Paper Writing -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">✍️</div>
+                        <h3 class="category-title">论文写作</h3>
+                    </div>
+                    <ul class="category-list">
+                        <li onclick="openModal('comer')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">计算机领域论文写作</div>
+                                <div class="item-desc">Doug Comer 的实验性论文撰写指南</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('ernst')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">技术写作技巧</div>
+                                <div class="item-desc">Mike Ernst 分享技术论文的写作艺术</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('offutt')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">写作与审稿指南</div>
+                                <div class="item-desc">Jeff Offutt 的论文写作与同行评审建议</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Presentation Skills -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🎤</div>
+                        <h3 class="category-title">演讲技巧</h3>
+                    </div>
+                    <ul class="category-list">
+                        <li onclick="openModal('talk')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">研究演讲方法</div>
+                                <div class="item-desc">如何准备和进行技术研讨会演讲</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('parberry')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">理论CS论文展示</div>
+                                <div class="item-desc">Ian Parberry 为学生准备的论文展示指南</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('goodtalk')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">优秀演讲秘诀</div>
+                                <div class="item-desc">打造令人印象深刻的学术演讲</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Career Development -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🚀</div>
+                        <h3 class="category-title">职业发展</h3>
+                    </div>
+                    <ul class="category-list">
+                        <li onclick="openModal('desjardins')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">成为优秀研究生</div>
+                                <div class="item-desc">Marie desJardins 的研究生成功指南</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('patterson')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">避免职业陷阱</div>
+                                <div class="item-desc">David Patterson 分析学术职业中的常见错误</div>
+                            </div>
+                        </li>
+                        <li onclick="openModal('lazowska')" style="cursor:pointer">
+                            <span class="bullet"></span>
+                            <div class="item-text">
+                                <div class="item-title">博士后职位获取</div>
+                                <div class="item-desc">Edward D. Lazowska 的求职策略建议</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PhD Success Pyramid -->
+        <section class="pyramid-section">
+            <div class="section-title">
+                <h2>🏔️ PhD 成功金字塔</h2>
+                <p>层层递进，构建坚实的学术基础</p>
+            </div>
+
+            <div class="pyramid-container">
+                <div class="pyramid-level">
+                    <div class="pyramid-block">
+                        <div class="level-title">🏆 学术影响力</div>
+                        <div class="level-desc">引领领域发展</div>
+                    </div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">
+                        <div class="level-title">🎯 独立研究能力</div>
+                        <div class="level-desc">提出原创问题 · 解决复杂挑战</div>
+                    </div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">
+                        <div class="level-title">📝 学术表达能力</div>
+                        <div class="level-desc">论文写作 · 学术演讲 · 同行交流</div>
+                    </div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">
+                        <div class="level-title">🔬 研究方法论</div>
+                        <div class="level-desc">实验设计 · 数据分析 · 批判思维</div>
+                    </div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">
+                        <div class="level-title">📚 知识基础</div>
+                        <div class="level-desc">文献阅读 · 理论学习 · 领域认知</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="insights-section">
+            <div class="section-title">
+                <h2>💡 核心洞见</h2>
+                <p>来自学术大师的智慧结晶</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <span class="insight-emoji">🎯</span>
+                    <h4 class="insight-title">选择比努力更重要</h4>
+                    <p class="insight-text">研究方向的选择决定了你未来几年的方向。选择一个你真正感兴趣且有影响力的问题，比盲目努力更有价值。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="insight-emoji">📖</span>
+                    <h4 class="insight-title">广泛阅读，深度思考</h4>
+                    <p class="insight-text">站在巨人的肩膀上。通过大量阅读了解领域现状，通过深度思考找到创新突破口。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="insight-emoji">✍️</span>
+                    <h4 class="insight-title">写作是思考的延伸</h4>
+                    <p class="insight-text">好的论文不是写出来的，是改出来的。写作帮助你理清思路，表达清晰的思想。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="insight-emoji">🗣️</span>
+                    <h4 class="insight-title">沟通能力同样重要</h4>
+                    <p class="insight-text">能够清晰地向他人解释你的研究，与完成研究本身一样重要。演讲能力是学术成功的关键技能。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="insight-emoji">🤝</span>
+                    <h4 class="insight-title">建立学术人脉</h4>
+                    <p class="insight-text">学术界是一个社区。参加会议，与同行交流，建立合作关系，这些都是长期成功的基础。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="insight-emoji">⚖️</span>
+                    <h4 class="insight-title">平衡与坚持</h4>
+                    <p class="insight-text">PhD是一场马拉松，不是百米冲刺。保持身心健康，在困难时期坚持下去，终会看到曙光。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Resources -->
+        <section class="resources-section">
+            <div class="section-title">
+                <h2>👨‍🏫 专家资源推荐</h2>
+                <p>来自顶尖学者的珍贵经验</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card" onclick="openModal('nielsen')">
+                    <div class="resource-author">
+                        <div class="author-avatar">📊</div>
+                        <span class="author-name">Michael A. Nielsen</span>
+                    </div>
+                    <div class="resource-title">Principles of Effective Research</div>
+                    <span class="resource-tag">研究方法</span>
+                </div>
+                <div class="resource-card" onclick="openModal('desjardins')">
+                    <div class="resource-author">
+                        <div class="author-avatar">🎓</div>
+                        <span class="author-name">Marie desJardins</span>
+                    </div>
+                    <div class="resource-title">How to be a Good Graduate Student</div>
+                    <span class="resource-tag">职业发展</span>
+                </div>
+                <div class="resource-card" onclick="openModal('patterson')">
+                    <div class="resource-author">
+                        <div class="author-avatar">⚠️</div>
+                        <span class="author-name">David Patterson</span>
+                    </div>
+                    <div class="resource-title">How to Have a Bad Career in Research</div>
+                    <span class="resource-tag">经验教训</span>
+                </div>
+                <div class="resource-card" onclick="openModal('comer')">
+                    <div class="resource-author">
+                        <div class="author-avatar">✏️</div>
+                        <span class="author-name">Doug Comer</span>
+                    </div>
+                    <div class="resource-title">How to Write Papers in CS</div>
+                    <span class="resource-tag">论文写作</span>
+                </div>
+                <div class="resource-card" onclick="openModal('parberry')">
+                    <div class="resource-author">
+                        <div class="author-avatar">🎤</div>
+                        <span class="author-name">Ian Parberry</span>
+                    </div>
+                    <div class="resource-title">How to Present a Paper in TCS</div>
+                    <span class="resource-tag">演讲技巧</span>
+                </div>
+                <div class="resource-card" onclick="openModal('lazowska')">
+                    <div class="resource-author">
+                        <div class="author-avatar">💼</div>
+                        <span class="author-name">Edward D. Lazowska</span>
+                    </div>
+                    <div class="resource-title">Getting a Position After PhD</div>
+                    <span class="resource-tag">求职指南</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-quote">"Research is formalized curiosity. It is poking and prying with a purpose."</p>
+            <p class="footer-text">— Zora Neale Hurston</p>
+            <a href="https://web.ece.ucsb.edu/~yuanxie/Advice.html" target="_blank" class="footer-link">
+                访问原始建议页面 →
+            </a>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-header-info">
+                    <div class="modal-avatar" id="modalAvatar">📊</div>
+                    <div class="modal-title-group">
+                        <h3 id="modalTitle">标题</h3>
+                        <p id="modalAuthor">作者</p>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Resource content data
+        const resourceContent = {
+            nielsen: {
+                avatar: '📊',
+                title: 'Principles of Effective Research',
+                author: 'Michael A. Nielsen',
+                content: `
+                    <h4>🎯 有效研究的核心原则</h4>
+                    <p>Michael Nielsen 是著名的量子计算研究者和科学作家，他总结了多年研究经验，为研究者提供了宝贵的指导。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"研究的本质是创造新知识。最好的研究者不仅仅是解决问题，而是提出正确的问题。"</p>
+                    </div>
+
+                    <h4>📋 核心建议</h4>
+                    <ul>
+                        <li><strong>选择正确的问题</strong> — 花时间思考什么问题值得研究。一个好的研究问题应该是重要的、可解决的，并且你有独特的视角。</li>
+                        <li><strong>建立日常研究习惯</strong> — 每天固定时间进行深度研究工作。保持专注，避免分心。研究是一场马拉松，而非短跑。</li>
+                        <li><strong>保持研究笔记</strong> — 记录你的想法、失败的尝试和成功的洞见。这些笔记将成为你未来研究的宝贵资源。</li>
+                        <li><strong>学会说"不"</strong> — 保护你的研究时间。拒绝那些不能推进你核心研究目标的事务。</li>
+                        <li><strong>培养深度思考能力</strong> — 不要急于求成。给自己时间去深入理解问题，而不是仅仅寻找快速解决方案。</li>
+                        <li><strong>建立支持网络</strong> — 与志同道合的研究者交流。找到能给你建设性反馈的同事和导师。</li>
+                    </ul>
+
+                    <h4>💡 关键洞见</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>问题优先</h5>
+                            <p>花80%的时间找问题，20%的时间解决问题</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📝</span>
+                            <h5>持续记录</h5>
+                            <p>每日研究笔记是你最宝贵的资产</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🧘</span>
+                            <h5>深度专注</h5>
+                            <p>4小时的深度工作胜过12小时的分散工作</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🌱</span>
+                            <h5>长期主义</h5>
+                            <p>研究是终身事业，保持好奇心和热情</p>
+                        </div>
+                    </div>
+                `
+            },
+            desjardins: {
+                avatar: '🎓',
+                title: 'How to be a Good Graduate Student',
+                author: 'Marie desJardins',
+                content: `
+                    <h4>🎓 如何成为优秀的研究生</h4>
+                    <p>Marie desJardins 教授基于多年指导研究生的经验，总结了成功研究生的关键特质和行为模式。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"成功的研究生不仅仅是聪明，更重要的是有正确的态度、良好的工作习惯和有效的沟通能力。"</p>
+                    </div>
+
+                    <h4>📋 成功研究生的特质</h4>
+                    <ul>
+                        <li><strong>主动性</strong> — 不要等待导师告诉你该做什么。主动寻找研究问题，主动阅读文献，主动寻求反馈。</li>
+                        <li><strong>独立性与合作的平衡</strong> — 学会独立思考和解决问题，同时也要善于寻求帮助和与他人合作。</li>
+                        <li><strong>时间管理</strong> — 研究生阶段的时间相对灵活，但这也意味着你需要自己管理时间。设定清晰的目标和截止日期。</li>
+                        <li><strong>处理失败的能力</strong> — 研究中大部分尝试都会失败。学会从失败中学习，保持积极心态。</li>
+                        <li><strong>有效沟通</strong> — 能够清晰地表达你的想法，无论是口头还是书面。这对论文写作和学术演讲至关重要。</li>
+                        <li><strong>寻求反馈</strong> — 定期与导师沟通，展示你的进展，寻求建设性意见。</li>
+                    </ul>
+
+                    <h4>🤝 与导师的关系</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">📅</span>
+                            <h5>定期会面</h5>
+                            <p>每周至少与导师见一次面，汇报进展</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📧</span>
+                            <h5>及时沟通</h5>
+                            <p>遇到问题及时沟通，不要让问题积累</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>明确期望</h5>
+                            <p>了解导师对你的期望，设定清晰目标</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🙏</span>
+                            <h5>尊重时间</h5>
+                            <p>准备充分再寻求帮助，尊重导师的时间</p>
+                        </div>
+                    </div>
+
+                    <h4>⚠️ 常见陷阱</h4>
+                    <ul>
+                        <li><strong>拖延症</strong> — 研究没有固定截止日期，很容易拖延。设定自己的里程碑。</li>
+                        <li><strong>完美主义</strong> — 不要等到完美才分享你的工作。"足够好"的进展比"完美但延迟"更有价值。</li>
+                        <li><strong>孤立工作</strong> — 不要把自己关在实验室里。参与学术社区，参加研讨会和会议。</li>
+                    </ul>
+                `
+            },
+            patterson: {
+                avatar: '⚠️',
+                title: 'How to Have a Bad Career in Research/Academia',
+                author: 'David Patterson',
+                content: `
+                    <h4>⚠️ 如何在学术界拥有糟糕的职业生涯</h4>
+                    <p>图灵奖得主 David Patterson 以反讽的方式，指出研究者常犯的错误。避免这些陷阱，你就能走向成功！</p>
+                    
+                    <div class="highlight-box">
+                        <p>"了解失败的方式，是走向成功的第一步。"</p>
+                    </div>
+
+                    <h4>🚫 糟糕研究生涯的"秘诀"（请务必避免！）</h4>
+                    <ul>
+                        <li><strong>追求热门而非重要</strong> — 只跟风研究热门话题，而不思考什么是真正重要的问题。热门话题往往竞争激烈且很快过时。</li>
+                        <li><strong>忽视写作和演讲</strong> — 认为只要研究做得好，表达能力不重要。实际上，无法有效传达的研究几乎等于没做。</li>
+                        <li><strong>单打独斗</strong> — 不与他人合作，不寻求反馈，不参与学术社区。孤立的研究者很难产生影响力。</li>
+                        <li><strong>轻视教学和服务</strong> — 只专注于研究，忽视教学责任和学术服务。这会影响你的晋升和声誉。</li>
+                        <li><strong>追求数量而非质量</strong> — 发表大量低质量论文，而不是专注于有影响力的工作。</li>
+                        <li><strong>忽视工业界联系</strong> — 完全脱离实际应用，研究无法解决真实问题。</li>
+                    </ul>
+
+                    <h4>✅ 成功的正确做法</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>选择重要问题</h5>
+                            <p>研究有长期影响力的问题，而非短期热点</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✍️</span>
+                            <h5>磨练表达能力</h5>
+                            <p>写作和演讲是研究者的核心竞争力</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🤝</span>
+                            <h5>建立合作关系</h5>
+                            <p>与不同背景的研究者合作，产生更大影响</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">⭐</span>
+                            <h5>追求质量</h5>
+                            <p>一篇有影响力的论文胜过十篇平庸之作</p>
+                        </div>
+                    </div>
+
+                    <h4>💎 Patterson 的金句</h4>
+                    <ul>
+                        <li>"如果你的研究不能改变别人的想法或做法，那它有什么意义？"</li>
+                        <li>"最好的研究者是那些能够识别并解决重要问题的人。"</li>
+                        <li>"学术界是一个小世界，你的声誉就是一切。"</li>
+                    </ul>
+                `
+            },
+            comer: {
+                avatar: '✏️',
+                title: 'How to Write Papers in Computer Science',
+                author: 'Doug Comer',
+                content: `
+                    <h4>✍️ 计算机科学论文写作指南</h4>
+                    <p>Doug Comer 教授是普渡大学的资深教授，他的论文写作指南帮助了无数研究生。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"写作不是研究的附属品，而是研究过程的核心部分。清晰的写作反映清晰的思维。"</p>
+                    </div>
+
+                    <h4>📝 论文结构</h4>
+                    <ul>
+                        <li><strong>标题</strong> — 简洁、准确、吸引人。读者通过标题决定是否继续阅读。</li>
+                        <li><strong>摘要</strong> — 独立完整地概括整篇论文。包含问题、方法、结果和意义。通常最后写。</li>
+                        <li><strong>引言</strong> — 介绍问题背景、动机、贡献和论文结构。让读者理解为什么这项研究重要。</li>
+                        <li><strong>相关工作</strong> — 总结相关研究，定位你的贡献。展示你了解领域现状。</li>
+                        <li><strong>方法/系统</strong> — 详细描述你的方法或系统设计。让读者能够复现你的工作。</li>
+                        <li><strong>实验/评估</strong> — 用数据和实验验证你的贡献。回答"它真的有效吗？"</li>
+                        <li><strong>结论</strong> — 总结贡献，讨论局限性，展望未来工作。</li>
+                    </ul>
+
+                    <h4>💡 写作技巧</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>明确核心贡献</h5>
+                            <p>在写作前明确你的主要贡献是什么</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">👀</span>
+                            <h5>读者视角</h5>
+                            <p>始终从读者角度思考：他们需要什么信息？</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✂️</span>
+                            <h5>简洁为上</h5>
+                            <p>删除不必要的词句，每个段落只表达一个主要观点</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🔄</span>
+                            <h5>反复修改</h5>
+                            <p>好论文是改出来的。至少修改5-10遍</p>
+                        </div>
+                    </div>
+
+                    <h4>⚠️ 常见错误</h4>
+                    <ul>
+                        <li><strong>过于冗长</strong> — 用三句话能说清的内容写了一页。尊重读者时间。</li>
+                        <li><strong>术语不一致</strong> — 同一概念使用不同术语，造成混淆。</li>
+                        <li><strong>图表质量差</strong> — 图表应该能独立说明问题，有清晰的标签和说明。</li>
+                        <li><strong>忽视相关工作</strong> — 不充分引用相关研究会被审稿人批评。</li>
+                    </ul>
+                `
+            },
+            parberry: {
+                avatar: '🎤',
+                title: 'How to Present a Paper in Theoretical Computer Science',
+                author: 'Ian Parberry',
+                content: `
+                    <h4>🎤 如何进行学术演讲</h4>
+                    <p>Ian Parberry 教授为学生提供了详细的学术演讲指南，帮助你在会议和研讨会上自信展示研究成果。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"演讲的目的不是展示你有多聪明，而是让听众理解你的工作为什么重要以及它是如何工作的。"</p>
+                    </div>
+
+                    <h4>📋 演讲准备</h4>
+                    <ul>
+                        <li><strong>了解你的听众</strong> — 他们是专家还是普通学者？调整技术深度和背景介绍的比例。</li>
+                        <li><strong>明确核心信息</strong> — 如果听众只能记住一件事，那应该是什么？围绕这个核心组织演讲。</li>
+                        <li><strong>控制内容量</strong> — 宁可讲少讲透，也不要试图塞入所有内容。20分钟的演讲最多覆盖3-4个要点。</li>
+                        <li><strong>设计幻灯片</strong> — 每张幻灯片一个主题，使用大字体（≥24pt），少文字多图示。</li>
+                        <li><strong>反复练习</strong> — 至少完整练习3次，计时确保不超时。最好在同事面前练习并获取反馈。</li>
+                    </ul>
+
+                    <h4>🎯 演讲结构</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🔥</span>
+                            <h5>开场（2-3分钟）</h5>
+                            <p>抓住注意力，介绍问题和动机</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📖</span>
+                            <h5>背景（3-5分钟）</h5>
+                            <p>提供必要的背景知识和相关工作</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">⚙️</span>
+                            <h5>核心内容（10-12分钟）</h5>
+                            <p>详细介绍你的方法和主要结果</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🏁</span>
+                            <h5>结尾（2-3分钟）</h5>
+                            <p>总结贡献，展望未来，感谢听众</p>
+                        </div>
+                    </div>
+
+                    <h4>💡 演讲技巧</h4>
+                    <ul>
+                        <li><strong>眼神交流</strong> — 看着听众而不是屏幕。与不同区域的听众建立联系。</li>
+                        <li><strong>控制语速</strong> — 紧张时容易说太快。有意识地放慢，留出思考时间。</li>
+                        <li><strong>使用过渡</strong> — 清晰的过渡帮助听众跟上你的思路。"现在让我们看看..."</li>
+                        <li><strong>准备问答</strong> — 预想可能的问题并准备答案。不知道答案时诚实承认。</li>
+                    </ul>
+
+                    <h4>⚠️ 常见错误</h4>
+                    <ul>
+                        <li>幻灯片上塞满文字和公式</li>
+                        <li>超时导致被打断</li>
+                        <li>过于技术化，失去非专家听众</li>
+                        <li>没有给出为什么听众应该关心的理由</li>
+                    </ul>
+                `
+            },
+            lazowska: {
+                avatar: '💼',
+                title: 'Getting a Position After Your PhD',
+                author: 'Edward D. Lazowska',
+                content: `
+                    <h4>💼 博士毕业后如何找到理想职位</h4>
+                    <p>Edward Lazowska 教授分享了帮助学生成功求职的宝贵建议，无论你是追求学术界还是工业界的职位。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"求职是一个需要战略规划的过程。提前准备、了解市场、建立人脉是成功的关键。"</p>
+                    </div>
+
+                    <h4>📅 求职时间线</h4>
+                    <ul>
+                        <li><strong>毕业前2年</strong> — 开始思考职业方向，建立研究声誉，参加重要会议。</li>
+                        <li><strong>毕业前1年</strong> — 确定目标职位类型，准备材料，联系推荐人。</li>
+                        <li><strong>秋季（学术界）</strong> — 大多数学术职位在秋季发布。准备好申请材料。</li>
+                        <li><strong>冬季</strong> — 面试季节。可能需要进行多次现场面试。</li>
+                        <li><strong>春季</strong> — 收到录用通知，谈判条件，做出决定。</li>
+                    </ul>
+
+                    <h4>📄 申请材料</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">📝</span>
+                            <h5>简历 (CV)</h5>
+                            <p>清晰展示教育、发表、项目、获奖等</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📖</span>
+                            <h5>研究陈述</h5>
+                            <p>描述过去的研究和未来的研究计划</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">👨‍🏫</span>
+                            <h5>教学陈述</h5>
+                            <p>你的教学理念和经验（学术界必需）</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✉️</span>
+                            <h5>推荐信</h5>
+                            <p>3-5封来自知名学者的强力推荐信</p>
+                        </div>
+                    </div>
+
+                    <h4>🎯 面试准备</h4>
+                    <ul>
+                        <li><strong>学术报告</strong> — 准备45-60分钟的学术报告，清晰展示你的研究贡献和未来愿景。</li>
+                        <li><strong>一对一会面</strong> — 准备好回答关于你的研究、未来计划、合作意愿等问题。</li>
+                        <li><strong>了解对方</strong> — 研究目标院系/公司，了解他们的研究方向和需求。</li>
+                        <li><strong>提问</strong> — 准备好向他们提问，展示你的兴趣和认真态度。</li>
+                    </ul>
+
+                    <h4>💡 关键建议</h4>
+                    <ul>
+                        <li><strong>建立声誉</strong> — 发表高质量论文是最重要的。让你的名字与优秀研究联系在一起。</li>
+                        <li><strong>扩大人脉</strong> — 参加会议，认识同行。很多机会来自人际关系。</li>
+                        <li><strong>多元选择</strong> — 不要只申请一类职位。学术界、工业界、研究院都值得考虑。</li>
+                        <li><strong>保持耐心</strong> — 求职过程可能漫长。保持积极心态，继续做好研究。</li>
+                    </ul>
+                `
+            },
+            bellare: {
+                avatar: '🔬',
+                title: 'PhD Experience',
+                author: 'Mihir Bellare',
+                content: `
+                    <h4>🔬 博士经历的深度反思</h4>
+                    <p>Mihir Bellare 教授是密码学领域的权威，他分享了自己博士生涯的宝贵经验和教训。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"博士不仅仅是获得一个学位，而是一次深刻的个人成长之旅。你会学会如何独立思考，如何面对失败，如何坚持不懈。"</p>
+                    </div>
+
+                    <h4>📋 博士阶段的关键经验</h4>
+                    <ul>
+                        <li><strong>选择正确的导师</strong> — 导师不仅影响你的研究方向，更影响你的研究风格和职业发展。找一个你尊重且能与之良好沟通的导师。</li>
+                        <li><strong>拥抱不确定性</strong> — 研究充满不确定性。学会在不确定中前进，而不是等待一切变得清晰。</li>
+                        <li><strong>从失败中学习</strong> — 大多数研究尝试都会失败。把失败看作学习机会，而不是个人失败。</li>
+                        <li><strong>建立研究直觉</strong> — 通过大量阅读和思考，培养对什么是好问题、什么方法可能有效的直觉。</li>
+                        <li><strong>珍惜博士时光</strong> — 这可能是你职业生涯中最自由探索的时期。好好利用这段时间深入学习。</li>
+                    </ul>
+
+                    <h4>💡 给新博士生的建议</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>专注深度</h5>
+                            <p>在一个领域深入研究，而不是浅尝辄止</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📚</span>
+                            <h5>广泛阅读</h5>
+                            <p>了解相邻领域，寻找交叉创新机会</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🤝</span>
+                            <h5>寻求合作</h5>
+                            <p>与不同背景的人合作，产生新想法</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">⏰</span>
+                            <h5>耐心坚持</h5>
+                            <p>重大突破需要时间，保持耐心</p>
+                        </div>
+                    </div>
+                `
+            },
+            henzinger: {
+                avatar: '📖',
+                title: 'Research Advice',
+                author: 'Tom Henzinger',
+                content: `
+                    <h4>📖 研究方法论深度指南</h4>
+                    <p>Tom Henzinger 教授是形式化方法和系统验证领域的先驱，他对研究方法有深刻的见解。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"好的研究不仅仅是解决问题，而是重新定义问题的边界，开辟新的可能性。"</p>
+                    </div>
+
+                    <h4>📋 研究方法论</h4>
+                    <ul>
+                        <li><strong>问题的选择</strong> — 好的研究问题应该是：(1) 重要的 — 解决后有实际影响；(2) 可行的 — 以现有技术可以取得进展；(3) 新颖的 — 没有被完全解决。</li>
+                        <li><strong>研究的层次</strong> — 区分增量改进和根本性创新。两者都有价值，但要知道自己在做什么。</li>
+                        <li><strong>抽象与具体</strong> — 好的理论来自具体问题的抽象，好的应用来自理论的具体化。两者之间要不断切换。</li>
+                        <li><strong>简洁的力量</strong> — 追求优雅简洁的解决方案。复杂的方案往往表明对问题理解不够深入。</li>
+                        <li><strong>验证想法</strong> — 在投入大量时间之前，先用简单例子验证你的想法是否可行。</li>
+                    </ul>
+
+                    <h4>🎯 提高研究效率</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">💭</span>
+                            <h5>深度思考时间</h5>
+                            <p>每天留出不被打扰的思考时间</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✍️</span>
+                            <h5>写作促进思考</h5>
+                            <p>通过写作整理和深化你的想法</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🗣️</span>
+                            <h5>讨论验证想法</h5>
+                            <p>向他人解释你的想法，发现盲点</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📊</span>
+                            <h5>记录进展</h5>
+                            <p>保持研究日志，追踪思路演变</p>
+                        </div>
+                    </div>
+                `
+            },
+            ernst: {
+                avatar: '📝',
+                title: 'Writing Technical Papers',
+                author: 'Mike Ernst',
+                content: `
+                    <h4>📝 技术论文写作艺术</h4>
+                    <p>Mike Ernst 教授在软件工程领域有丰富的写作和审稿经验，他的建议帮助无数学生提高论文质量。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"技术写作的目标不是展示你知道多少，而是有效地传递一个核心信息。每一句话都应该服务于这个目标。"</p>
+                    </div>
+
+                    <h4>📋 写作的核心原则</h4>
+                    <ul>
+                        <li><strong>一个核心贡献</strong> — 论文应该有一个清晰的主要贡献。如果你无法用一句话总结，说明还需要更多思考。</li>
+                        <li><strong>读者优先</strong> — 始终从读者角度写作。他们需要什么背景？什么顺序最容易理解？</li>
+                        <li><strong>主动语态</strong> — 使用主动语态让文章更清晰有力。"We propose..." 比 "A method is proposed..." 更好。</li>
+                        <li><strong>具体胜于抽象</strong> — 用具体的例子说明抽象的概念。读者通过例子理解你的想法。</li>
+                        <li><strong>逻辑流程</strong> — 每个段落有一个主题，段落之间有清晰的逻辑连接。</li>
+                    </ul>
+
+                    <h4>✏️ 实用写作技巧</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>先写大纲</h5>
+                            <p>在写作前确定结构和要点</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✂️</span>
+                            <h5>大胆删减</h5>
+                            <p>删除不支持核心论点的内容</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">👥</span>
+                            <h5>寻求反馈</h5>
+                            <p>让同事阅读并提供修改建议</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📖</span>
+                            <h5>大声朗读</h5>
+                            <p>朗读发现不通顺的句子</p>
+                        </div>
+                    </div>
+
+                    <h4>⚠️ 避免的写作问题</h4>
+                    <ul>
+                        <li><strong>过度使用被动语态</strong> — 让文章失去活力和清晰度</li>
+                        <li><strong>术语堆砌</strong> — 用简单词汇表达，除非术语是必要的</li>
+                        <li><strong>过长句子</strong> — 如果一个句子超过两行，考虑拆分</li>
+                        <li><strong>缺乏过渡</strong> — 段落之间需要逻辑连接</li>
+                    </ul>
+                `
+            },
+            offutt: {
+                avatar: '📄',
+                title: 'Paper Writing and Reviewing',
+                author: 'Jeff Offutt',
+                content: `
+                    <h4>📄 论文写作与同行评审</h4>
+                    <p>Jeff Offutt 教授分享了作为作者和审稿人的双重视角，帮助你写出更容易被接受的论文。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"理解审稿人的视角，会让你成为更好的作者。审稿人通常时间有限，他们需要快速理解你的贡献。"</p>
+                    </div>
+
+                    <h4>📋 审稿人视角</h4>
+                    <ul>
+                        <li><strong>第一印象很重要</strong> — 审稿人通过标题、摘要和引言形成第一印象。确保这些部分清晰有力。</li>
+                        <li><strong>贡献必须明确</strong> — 审稿人需要快速理解你的贡献是什么，为什么重要。不要让他们猜测。</li>
+                        <li><strong>相关工作要全面</strong> — 遗漏重要的相关工作是拒稿的常见原因。做好文献调研。</li>
+                        <li><strong>实验要可信</strong> — 清晰描述实验设置，展示你考虑了各种因素。统计显著性很重要。</li>
+                        <li><strong>格式要专业</strong> — 遵循会议/期刊的格式要求。格式问题会给审稿人留下不好的印象。</li>
+                    </ul>
+
+                    <h4>📝 提高接受率的技巧</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">🎯</span>
+                            <h5>选对期刊/会议</h5>
+                            <p>了解目标发表场所的偏好和标准</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📊</span>
+                            <h5>充分的评估</h5>
+                            <p>用多种方式验证你的方法有效</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">✉️</span>
+                            <h5>认真回复</h5>
+                            <p>详细回应每一条审稿意见</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🔄</span>
+                            <h5>持续改进</h5>
+                            <p>被拒后改进论文重新投稿</p>
+                        </div>
+                    </div>
+
+                    <h4>✅ 成为好审稿人</h4>
+                    <ul>
+                        <li><strong>建设性反馈</strong> — 指出问题的同时提供改进建议</li>
+                        <li><strong>尊重作者</strong> — 批评工作，而不是人</li>
+                        <li><strong>准时完成</strong> — 按时提交审稿意见，尊重出版流程</li>
+                        <li><strong>保持公正</strong> — 基于论文质量评价，而不是作者身份</li>
+                    </ul>
+                `
+            },
+            talk: {
+                avatar: '🎙️',
+                title: 'How to Give a Research Talk',
+                author: '研究演讲指南',
+                content: `
+                    <h4>🎙️ 如何做好研究演讲</h4>
+                    <p>学术演讲是展示研究成果和建立学术声誉的重要方式。本指南汇集了多位学者的演讲经验。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"好的演讲不是关于你有多聪明，而是让听众带走有价值的东西。"</p>
+                    </div>
+
+                    <h4>📋 演讲的核心要素</h4>
+                    <ul>
+                        <li><strong>了解听众</strong> — 根据听众的背景调整内容深度。会议演讲和部门研讨会的听众很不同。</li>
+                        <li><strong>一个核心信息</strong> — 如果听众只能记住一件事，那应该是什么？围绕这个组织整个演讲。</li>
+                        <li><strong>讲故事</strong> — 把研究组织成一个故事：问题是什么？为什么难？你的洞见是什么？结果如何？</li>
+                        <li><strong>可视化</strong> — 用图表、动画、示例代替文字和公式。视觉信息更容易理解和记忆。</li>
+                        <li><strong>练习</strong> — 至少完整练习3次。计时，确保不超时。</li>
+                    </ul>
+
+                    <h4>🎨 幻灯片设计原则</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">📝</span>
+                            <h5>少即是多</h5>
+                            <p>每页一个主要观点，最少的文字</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🔤</span>
+                            <h5>大字体</h5>
+                            <p>确保最后一排也能看清（≥24pt）</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📊</span>
+                            <h5>图表优先</h5>
+                            <p>用图表代替表格和文字描述</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🎨</span>
+                            <h5>一致风格</h5>
+                            <p>统一的颜色、字体和布局</p>
+                        </div>
+                    </div>
+
+                    <h4>🎤 演讲技巧</h4>
+                    <ul>
+                        <li><strong>眼神交流</strong> — 看着听众，而不是屏幕或笔记</li>
+                        <li><strong>控制语速</strong> — 紧张时会说太快，有意识地放慢</li>
+                        <li><strong>使用停顿</strong> — 重要观点后停顿，让听众消化</li>
+                        <li><strong>互动</strong> — 适时提问或请听众思考</li>
+                    </ul>
+                `
+            },
+            goodtalk: {
+                avatar: '⭐',
+                title: 'Giving Effective Presentations',
+                author: '优秀演讲秘诀',
+                content: `
+                    <h4>⭐ 打造令人印象深刻的学术演讲</h4>
+                    <p>本指南综合了多位成功学者的演讲经验，帮助你从普通演讲者成长为优秀演讲者。</p>
+                    
+                    <div class="highlight-box">
+                        <p>"演讲的成功不在于你说了什么，而在于听众记住了什么。"</p>
+                    </div>
+
+                    <h4>📋 优秀演讲的特征</h4>
+                    <ul>
+                        <li><strong>引人入胜的开场</strong> — 用一个问题、故事或令人惊讶的事实抓住听众注意力。避免"今天我要讲..."这样的平淡开场。</li>
+                        <li><strong>清晰的结构</strong> — 听众应该始终知道你在讲什么，以及它如何与整体相关。使用路标（"现在让我们看看..."）</li>
+                        <li><strong>生动的例子</strong> — 抽象概念通过具体例子变得可理解。好的例子让复杂想法变得简单。</li>
+                        <li><strong>适当的幽默</strong> — 适度的幽默让演讲更轻松，但要自然，不要强求。</li>
+                        <li><strong>有力的结尾</strong> — 用一个令人记忆深刻的总结或行动号召结束。不要以"就这些"或"有问题吗"结尾。</li>
+                    </ul>
+
+                    <h4>🚀 提升演讲能力的方法</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <span class="emoji">👀</span>
+                            <h5>观察学习</h5>
+                            <p>观看优秀演讲，分析他们的技巧</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">🎥</span>
+                            <h5>录像复盘</h5>
+                            <p>录下自己的演讲，发现改进点</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">💪</span>
+                            <h5>反复练习</h5>
+                            <p>演讲能力通过练习提高</p>
+                        </div>
+                        <div class="key-point">
+                            <span class="emoji">📝</span>
+                            <h5>收集反馈</h5>
+                            <p>请同事给出具体的改进建议</p>
+                        </div>
+                    </div>
+
+                    <h4>⚠️ 常见错误</h4>
+                    <ul>
+                        <li><strong>信息过载</strong> — 试图在有限时间内塞入太多内容</li>
+                        <li><strong>读幻灯片</strong> — 幻灯片是辅助，不是演讲稿</li>
+                        <li><strong>背对听众</strong> — 总是面向听众，而不是屏幕</li>
+                        <li><strong>忽视时间</strong> — 超时是对听众的不尊重</li>
+                        <li><strong>紧张失态</strong> — 适度紧张是正常的，通过准备和练习克服</li>
+                    </ul>
+
+                    <h4>💎 演讲金句</h4>
+                    <ul>
+                        <li>"如果你不能简单地解释它，你就没有真正理解它。" — 爱因斯坦</li>
+                        <li>"演讲的最高境界是让复杂的事情变得简单。"</li>
+                        <li>"准备是信心的来源。准备越充分，表现越自然。"</li>
+                    </ul>
+                `
+            }
+        };
+
+        // Modal functions
+        function openModal(resourceId) {
+            const resource = resourceContent[resourceId];
+            if (!resource) return;
+
+            document.getElementById('modalAvatar').textContent = resource.avatar;
+            document.getElementById('modalTitle').textContent = resource.title;
+            document.getElementById('modalAuthor').textContent = resource.author;
+            document.getElementById('modalBody').innerHTML = resource.content;
+            
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.stat-card, .category-card, .insight-card, .resource-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Add stagger delay to grid items
+        document.querySelectorAll('.stats-grid .stat-card').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.1}s`;
+        });
+
+        document.querySelectorAll('.category-grid .category-card').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.15}s`;
+        });
+
+        document.querySelectorAll('.insights-grid .insight-card').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.1}s`;
+        });
+
+        document.querySelectorAll('.resources-grid .resource-card').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.08}s`;
+        });
+    </script>
+</body>
+</html>
+
